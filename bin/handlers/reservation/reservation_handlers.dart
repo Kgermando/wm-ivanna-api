@@ -4,6 +4,7 @@ import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
  
 import '../../models/reservation/reservation_model.dart';
+import '../../models/rh/agent_count_model.dart';
 import '../../repository/repository.dart';
 
 class ReservationHandlers {
@@ -16,6 +17,11 @@ class ReservationHandlers {
 
     router.get('/<business>/', (Request request, String business) async {
       List<ReservationModel> data = await repos.reservationRepository.getAllData(business);
+      return Response.ok(jsonEncode(data));
+    });
+
+    router.get('/chart-pie/<business>/', (Request request, String business) async {
+      List<ReservationPieChartModel> data = await repos.reservationRepository.getChartPie(business);
       return Response.ok(jsonEncode(data));
     });
  

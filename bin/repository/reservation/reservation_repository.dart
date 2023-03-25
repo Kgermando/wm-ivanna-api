@@ -1,6 +1,7 @@
 import 'package:postgres/postgres.dart';
 
 import '../../models/reservation/reservation_model.dart';
+import '../../models/rh/agent_count_model.dart';
  
 
 class ReservationRepository {
@@ -18,6 +19,22 @@ class ReservationRepository {
       data.add(ReservationModel.fromSQL(row));
     }
     return data.toList();
+  }
+
+  Future<List<ReservationPieChartModel>> getChartPie(String business) async {
+    try {
+      var data = <ReservationPieChartModel>{};
+
+      var querySQL =
+          "SELECT event_name, COUNT(event_name) FROM $tableName WHERE \"business\"='$business' GROUP BY \"event_name\";";
+      List<List<dynamic>> results = await executor.query(querySQL);
+      for (var row in results) {
+        data.add(ReservationPieChartModel.fromSQL(row));
+      }
+      return data.toList();
+    } catch (e) {
+      throw ReservationPieChartModel;
+    }
   }
 
   Future<void> insertData(ReservationModel data) async {
