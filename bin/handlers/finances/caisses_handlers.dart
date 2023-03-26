@@ -4,6 +4,7 @@ import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
 import '../../models/finance/caisse_model.dart'; 
+import '../../models/finance/charts_multi.dart';
 import '../../repository/repository.dart';
 
 class CaissesHandlers {
@@ -18,6 +19,13 @@ class CaissesHandlers {
       List<CaisseModel> data = await repos.caisses.getAllData(business);
       return Response.ok(jsonEncode(data));
     });
+
+    
+    router.get('/chart/<business>/', (Request request, String business) async {
+      List<ChartFinanceModel> data = await repos.caisses.getAllDataChart(business);
+      return Response.ok(jsonEncode(data));
+    }); 
+
  
     router.get('/<id>', (Request request, String id) async {
       late CaisseModel agent;

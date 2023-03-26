@@ -1,5 +1,6 @@
 import 'package:postgres/postgres.dart';
 
+import '../../models/finance/charts_multi.dart';
 import '../../models/finance/caisse_model.dart'; 
 
 class CaissesRepository {
@@ -18,6 +19,19 @@ class CaissesRepository {
     }
     return data.toList();
   }
+
+  Future<List<ChartFinanceModel>> getAllDataChart(String business) async {
+    var data = <ChartFinanceModel>{};
+
+    var querySQL =
+        "SELECT \"caisse_name\", SUM(\"montant_encaissement\"::FLOAT), SUM(\"montant_decaissement\"::FLOAT) FROM $tableName  WHERE \"business\"='$business' GROUP BY \"caisse_name\";";
+
+    List<List<dynamic>> results = await executor.query(querySQL);
+    for (var row in results) {
+      data.add(ChartFinanceModel.fromSQL(row));
+    }
+    return data.toList();
+  } 
 
   Future<void> insertData(CaisseModel data) async {
     await executor.transaction((ctx) async {
