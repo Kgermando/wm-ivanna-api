@@ -28,6 +28,7 @@ import 'handlers/finances/caisses_handlers.dart';
 import 'handlers/livraison/creance_livraison_handlers.dart';
 import 'handlers/livraison/facture_livraison_handlers.dart';
 import 'handlers/livraison/livraison_handlers.dart';
+import 'handlers/livraison/prod_model_livraison_handlers.dart';
 import 'handlers/livraison/table_livraison_handlers.dart';
 import 'handlers/livraison/vente_effectuee_livraison_handlers.dart';
 import 'handlers/mails/mails_handlers.dart';
@@ -40,6 +41,7 @@ import 'handlers/reservation/paiement_reservation_handlers.dart';
 import 'handlers/reservation/reservation_handlers.dart';
 import 'handlers/restaurant/creance_rest_handlers.dart';
 import 'handlers/restaurant/facture_rest_handlers.dart';
+import 'handlers/restaurant/prod_model_rest_handlers.dart';
 import 'handlers/restaurant/restaurant_handlers.dart';
 import 'handlers/restaurant/table_restaurant_handlers.dart';
 import 'handlers/restaurant/vente_effectuee_rest_handlers.dart';
@@ -47,12 +49,14 @@ import 'handlers/rh/agents_handlers.dart';
 import 'handlers/settings/monnaie_handlers.dart';
 import 'handlers/terrasse/creance_terrasse_handlers.dart';
 import 'handlers/terrasse/facture_terrasse_handlers.dart';
+import 'handlers/terrasse/prod_model_terrasse_handlers.dart';
 import 'handlers/terrasse/table_terrasse_handlers.dart';
 import 'handlers/terrasse/terrasse_handlers.dart';
 import 'handlers/terrasse/vente_effectuee_terrasse_handlers.dart';
 import 'handlers/update/upate_handlers.dart';
 import 'handlers/vip/creance_vip_handlers.dart';
 import 'handlers/vip/facture_vip_handlers.dart';
+import 'handlers/vip/prod_model_vip_handlers.dart';
 import 'handlers/vip/table_vip_handlers.dart';
 import 'handlers/vip/vente_effectuee_vip_handlers.dart';
 import 'handlers/vip/vip_handlers.dart';
@@ -221,6 +225,14 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(NumberFactHandlers(repos).router)); 
 
+    // Restaurant
+    router.mount(
+        '/api/prod-mode-rests/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ProdModelRestHandlers(repos).router));
     router.mount(
         '/api/restaurants/',
         Pipeline()
@@ -257,6 +269,14 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(VenteEffectueeRestHandlers(repos).router));
 
+    // VIP
+    router.mount(
+        '/api/prod-mode-vips/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ProdModelVipHandlers(repos).router));
     router.mount(
         '/api/vips/',
         Pipeline()
@@ -293,6 +313,14 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(VenteEffectueeVipHandlers(repos).router)); 
 
+    // Terrasse
+      router.mount(
+      '/api/prod-mode-terrasses/',
+      Pipeline()
+          .addMiddleware(setJsonHeader())
+          .addMiddleware(handleErrors())
+          // .addMiddleware(handleAuth(serverSecretKey))
+          .addHandler(ProdModelTerrasseHandlers(repos).router));
     router.mount(
         '/api/terrasses/',
         Pipeline()
@@ -328,7 +356,14 @@ class Service {
             .addMiddleware(handleErrors())
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(VenteEffectueeTerrasseHandlers(repos).router));
-
+    // Livraison
+     router.mount(
+        '/api/prod-mode-livraisons/',
+        Pipeline()
+            .addMiddleware(setJsonHeader())
+            .addMiddleware(handleErrors())
+            // .addMiddleware(handleAuth(serverSecretKey))
+            .addHandler(ProdModelLivraisonHandlers(repos).router));
      router.mount(
         '/api/livraisons/',
         Pipeline()
