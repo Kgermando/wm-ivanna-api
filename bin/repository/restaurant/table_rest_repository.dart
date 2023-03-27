@@ -25,15 +25,18 @@ class TableRestRepository {
     await executor.transaction((ctx) async {
       await ctx.execute(
           "INSERT INTO $tableName (id, table, part,"
-          "succursale, signature, created, business)"
-          "VALUES (nextval('table_rests_id_seq'), @1, @2, @3, @4, @5, @6)",
+          "succursale, signature, created, business,"
+          "sync, async)"
+          "VALUES (nextval('table_rests_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8)",
           substitutionValues: {
             '1': data.table,
             '2': data.part,
             '3': data.succursale,
             '4': data.signature,
             '5': data.created,
-            '6': data.business
+            '6': data.business,
+            '7': data.sync,
+            '8': data.async
           });
     });
   }
@@ -41,16 +44,18 @@ class TableRestRepository {
   Future<void> update(TableRestaurantModel data) async {
     await executor.query("""UPDATE $tableName
       SET table = @1, part = @2, succursale = @3,
-      signature = @4, created = @5, business = @6 WHERE id = @7""",
-        substitutionValues: {
-          '1': data.table,
-          '2': data.part,
-          '3': data.succursale,
-          '4': data.signature,
-          '5': data.created,
-          '6': data.business,
-          '7': data.id
-        });
+      signature = @4, created = @5, business = @6, 
+      sync = @7, async = @8 WHERE id = @9""", substitutionValues: {
+      '1': data.table,
+      '2': data.part,
+      '3': data.succursale,
+      '4': data.signature,
+      '5': data.created,
+      '6': data.business,
+      '7': data.sync,
+      '8': data.async,
+      '9': data.id
+    });
   }
 
   deleteData(int id) async {
@@ -75,6 +80,8 @@ class TableRestRepository {
       signature: data[0][4],
       created: data[0][5],
       business: data[0][6],
+      sync: data[0][7],
+      async: data[0][8],
     );
   }
 }

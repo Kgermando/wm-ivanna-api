@@ -39,6 +39,8 @@ class TableRestaurantHandlers {
         signature: input['signature'],
         created: DateTime.parse(input['created']), 
         business: input['business'],
+        sync: input['sync'],
+        async: input['async'],
       );
 
       try {
@@ -71,6 +73,12 @@ class TableRestaurantHandlers {
       } 
       if (input['business'] != null) {
         dataItem.business = input['business'];
+      }
+      if (input['sync'] != null) {
+        dataItem.sync = input['sync'];
+      }
+      if (input['async'] != null) {
+        dataItem.async = input['async'];
       }
 
       repos.tableRests.update(dataItem);

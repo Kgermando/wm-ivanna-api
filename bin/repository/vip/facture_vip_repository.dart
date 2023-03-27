@@ -26,8 +26,9 @@ class FactureVipRepository {
       await ctx.execute(
         "INSERT INTO $tableName (id, cart, client,"
           "nom_client, telephone,"
-          "succursale, signature, created, business)"
-          "VALUES (nextval('facture_vips_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8)",
+          "succursale, signature, created, business, sync, async)"
+          "VALUES (nextval('facture_vips_id_seq'),"
+          "@1, @2, @3, @4, @5, @6, @7, @8, @9, @10)",
           substitutionValues: {
             '1': data.cart,
             '2': data.client,
@@ -36,7 +37,9 @@ class FactureVipRepository {
             '5': data.succursale,
             '6': data.signature,
             '7': data.created,
-            '8': data.business
+            '8': data.business,
+            '9': data.sync,
+            '10': data.async,
           });
     }); 
   }
@@ -45,7 +48,8 @@ class FactureVipRepository {
      await executor.query("""UPDATE $tableName
       SET cart = @1, client = @2, nom_client = @3,
         telephone = @4, succursale = @5,
-          signature = @6, created = @7, business = @8 WHERE id = @9""", substitutionValues: {
+        signature = @6, created = @7, business = @8, 
+        sync = @9, async = @10 WHERE id = @11""", substitutionValues: {
       '1': data.cart,
       '2': data.client,
       '3': data.nomClient,
@@ -54,7 +58,9 @@ class FactureVipRepository {
       '6': data.signature,
       '7': data.created,
       '8': data.business,
-      '9': data.id
+      '9': data.sync,
+      '10': data.async,
+      '11': data.id
     });
   }
 
@@ -81,7 +87,9 @@ class FactureVipRepository {
       succursale: data[0][5],
       signature: data[0][6],
       created: data[0][7],
-      business: data[0][8]
+      business: data[0][8],
+      sync: data[0][9],
+      async: data[0][10],
     );
   } 
 }

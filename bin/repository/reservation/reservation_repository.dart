@@ -42,9 +42,10 @@ class ReservationRepository {
       await ctx.query(
           "INSERT INTO $tableName (id, client, telephone, email,"
           "adresse, nbre_personne, duree_event, created_day, background,"
-          "event_name, signature, created, montant, business)"
+          "event_name, signature, created, montant,"
+          "business, sync, async)"
           "VALUES (nextval('reservations_id_seq'), @1, @2, @3,"
-          "@4, @5, @6, @7, @8, @9, @10, @11, @12, @13)",
+          "@4, @5, @6, @7, @8, @9, @10, @11, @12, @13, @14, @15)",
           substitutionValues: {
             '1': data.client,
             '2': data.telephone,
@@ -58,7 +59,9 @@ class ReservationRepository {
             '10': data.signature,
             '11': data.created,
             '12': data.montant,
-            '13': data.business
+            '13': data.business,
+            '14': data.sync,
+            '15': data.async 
           });
     });
   }
@@ -68,7 +71,8 @@ class ReservationRepository {
       SET client = @1, telephone = @2, email = @3, adresse = @4, 
         nbre_personne = @5, duree_event = @6, created_day = @7, background = @8, 
         event_name = @9, signature = @10, created = @11, 
-        montant = @12, business = @13 WHERE id = @14""",
+        montant = @12, business = @13,
+        sync = @14, async = @15 WHERE id = @16""",
         substitutionValues: {
           '1': data.client,
           '2': data.telephone,
@@ -83,7 +87,9 @@ class ReservationRepository {
           '11': data.created,
           '12': data.montant,
           '13': data.business,
-          '14': data.id
+          '14': data.sync,
+          '15': data.async,
+          '16': data.id
         });
   }
 
@@ -117,6 +123,8 @@ class ReservationRepository {
       created: data[0][11],
       montant: data[0][12],
       business: data[0][13],
+      sync: data[0][14],
+      async: data[0][15],
     );
   }
 }

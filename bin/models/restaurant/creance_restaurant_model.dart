@@ -10,6 +10,8 @@ class CreanceRestaurantModel {
   late String signature; // celui qui fait le document
   late DateTime created;
   late String business;
+  late String sync; // new, update, sync
+  late String async;
 
   CreanceRestaurantModel(
       {this.id,
@@ -22,7 +24,10 @@ class CreanceRestaurantModel {
       required this.succursale,
       required this.signature,
       required this.created,
-      required this.business});
+      required this.business,
+    required this.sync,
+    required this.async,
+  });
 
   factory CreanceRestaurantModel.fromSQL(List<dynamic> row) {
     return CreanceRestaurantModel(
@@ -36,7 +41,9 @@ class CreanceRestaurantModel {
         succursale: row[7],
         signature: row[8],
         created: row[9],
-        business: row[10]);
+        business: row[10],
+        sync: row[11],
+        async: row[12]);
   }
 
   factory CreanceRestaurantModel.fromJson(Map<String, dynamic> json) { 
@@ -51,7 +58,9 @@ class CreanceRestaurantModel {
       succursale: json['succursale'],
       signature: json['signature'],
       created: DateTime.parse(json['created']),
-        business: json['business']
+        business: json['business'],
+      sync: json['sync'],
+      async: json['async'],
     );
   }
 
@@ -67,7 +76,9 @@ class CreanceRestaurantModel {
       'succursale': succursale,
       'signature': signature,
       'created': created.toIso8601String(),
-      'business': business
+      'business': business,
+      'sync': sync,
+      'async': async,
     };
   }
 

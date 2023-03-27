@@ -26,9 +26,9 @@ class VipRepository {
       await ctx.query(
           "INSERT INTO $tableName (id, identifiant, table, qty,"
           "price, unite, statut_commande, succursale, signature,"
-          "created, business)"
+          "created, business, sync, async)"
           "VALUES (nextval('vips_id_seq'), @1, @2, @3,"
-          "@4, @5, @6, @7, @8, @9, @10)",
+          "@4, @5, @6, @7, @8, @9, @10, @11, @12)",
           substitutionValues: {
             '1': data.identifiant,
             '2': data.table,
@@ -39,7 +39,9 @@ class VipRepository {
             '7': data.succursale,
             '8': data.signature,
             '9': data.created,
-            '10': data.business
+            '10': data.business,
+            '11': data.sync,
+            '12': data.async
           });
     });
   }
@@ -48,7 +50,7 @@ class VipRepository {
     await executor.query("""UPDATE $tableName
       SET identifiant = @1, table = @2, qty = @3, price = @4, 
         unite = @5, statut_commande = @6, succursale = @7, signature = @8, 
-        created = @9, business = @10 WHERE id = @11""", substitutionValues: {
+        created = @9, business = @10, sync = @11, async = @12 WHERE id = @13""", substitutionValues: {
       '1': data.identifiant,
       '2': data.table,
       '3': data.qty,
@@ -59,7 +61,9 @@ class VipRepository {
       '8': data.signature,
       '9': data.created,
       '10': data.business,
-      '11': data.id
+      '11': data.sync,
+      '12': data.async,
+      '13': data.id
     });
   }
 
@@ -90,6 +94,8 @@ class VipRepository {
       signature: data[0][8],
       created: data[0][9],
       business: data[0][10],
+      sync: data[0][11],
+      async: data[0][12],
     );
   }
 }

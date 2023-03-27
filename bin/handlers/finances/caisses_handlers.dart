@@ -55,6 +55,8 @@ class CaissesHandlers {
           created: DateTime.parse(input['created']),
         montantDecaissement: input['montantDecaissement'],
         business: input['business'],
+        sync: input['sync'],
+        async: input['async'],
       );
       try {
         await repos.caisses.insertData(data);
@@ -109,6 +111,12 @@ class CaissesHandlers {
       }
       if (input['business'] != null) {
         data.business = input['business'];
+      }
+      if (input['sync'] != null) {
+        data.sync = input['sync'];
+      }
+      if (input['async'] != null) {
+        data.async = input['async'];
       }
       repos.caisses.update(data);
       return Response.ok(jsonEncode(data.toJson()));

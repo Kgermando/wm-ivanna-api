@@ -35,22 +35,20 @@ Middleware handleErrors() {
 }
 
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
+  'Content-Type': 'application/json; charset=utf-8',
+  'Access-Control-Allow-Origin': 'app',
   'Access-Control-Expose-Headers': 'Authorization, Content-Type',
   'Access-Control-Allow-Headers':
       'Authorization, Origin, X-Requested-With, Content-Type, Accept',
-  'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE'
-}; 
- 
+  'Access-Control-Allow-Methods': 'GET, DELETE, HEAD, OPTIONS'
+};  
+
 Middleware setJsonHeader() {
   return (Handler innerHandler) {
     return (Request request) async {
-      Response response = await innerHandler(request);
+      Response response = await innerHandler(request); 
       return response.change(
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-          ...corsHeaders, // add corsHeaders to response headers of each route
-        }
+        headers: corsHeaders
       );
     };
   };

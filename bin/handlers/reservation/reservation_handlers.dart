@@ -52,6 +52,8 @@ class ReservationHandlers {
           created: DateTime.parse(input['created']),
         montant: input['montant'],
         business: input['business'],
+        sync: input['sync'],
+        async: input['async'],
       );
 
       try {
@@ -106,6 +108,12 @@ class ReservationHandlers {
       }
       if (input['business'] != null) {
         dataItem.business = input['business'];
+      }
+      if (input['sync'] != null) {
+        dataItem.sync = input['sync'];
+      }
+      if (input['async'] != null) {
+        dataItem.async = input['async'];
       }
 
       repos.reservationRepository.update(dataItem);

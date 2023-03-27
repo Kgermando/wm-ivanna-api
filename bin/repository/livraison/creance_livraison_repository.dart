@@ -24,10 +24,32 @@ class CreanceLivraisonRepository {
   Future<void> insertData(CreanceRestaurantModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-        "INSERT INTO $tableName (id, cart, client,"
-        "nom_client, telephone, addresse, delai_paiement,"
-        "succursale, signature, created, business)"
-        "VALUES (nextval('creance_livraisons_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10)",
+          "INSERT INTO $tableName (id, cart, client,"
+          "nom_client, telephone, addresse, delai_paiement,"
+          "succursale, signature, created, business, sync, async)"
+          "VALUES (nextval('creance_livraisons_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12)",
+          substitutionValues: {
+            '1': data.cart,
+            '2': data.client,
+            '3': data.nomClient,
+            '4': data.telephone,
+            '5': data.addresse,
+            '6': data.delaiPaiement,
+            '7': data.succursale,
+            '8': data.signature,
+            '9': data.created,
+            '10': data.business,
+            '11': data.sync,
+            '12': data.async
+          });
+    });
+  }
+
+  Future<void> update(CreanceRestaurantModel data) async {
+    await executor.query("""UPDATE $tableName
+      SET cart = @1, client = @2, nom_client = @3,
+      telephone = @4, addresse = @5, delai_paiement = @6, succursale = @7,
+      signature = @8, created = @9, business = @10, sync = @11, async = @12 WHERE id = @13""",
         substitutionValues: {
           '1': data.cart,
           '2': data.client,
@@ -38,30 +60,12 @@ class CreanceLivraisonRepository {
           '7': data.succursale,
           '8': data.signature,
           '9': data.created,
-          '10': data.business
-        }
-      );
-    });
+          '10': data.business,
+          '11': data.sync,
+          '12': data.async,
+          '13': data.id
+        });
   }
-
-  Future<void> update(CreanceRestaurantModel data) async {
-    await executor.query("""UPDATE $tableName
-      SET cart = @1, client = @2, nom_client = @3,
-      telephone = @4, addresse = @5, delai_paiement = @6, succursale = @7,
-      signature = @8, created = @9, business = @10 WHERE id = @11""", substitutionValues: {
-      '1': data.cart,
-      '2': data.client,
-      '3': data.nomClient,
-      '4': data.telephone,
-      '5': data.addresse,
-      '6': data.delaiPaiement,
-      '7': data.succursale,
-      '8': data.signature,
-      '9': data.created,
-      '10': data.business,
-      '11': data.id
-    });
-  } 
 
   deleteData(int id) async {
     try {
@@ -78,17 +82,18 @@ class CreanceLivraisonRepository {
     var data =
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
     return CreanceRestaurantModel(
-      id: data[0][0],
-      cart: data[0][1],
-      client: data[0][2],
-      nomClient: data[0][3],
-      telephone: data[0][4],
-      addresse: data[0][5],
-      delaiPaiement: data[0][6],
-      succursale: data[0][7],
-      signature: data[0][8],
-      created: data[0][9],
-      business: data[0][10]
-    );
+        id: data[0][0],
+        cart: data[0][1],
+        client: data[0][2],
+        nomClient: data[0][3],
+        telephone: data[0][4],
+        addresse: data[0][5],
+        delaiPaiement: data[0][6],
+        succursale: data[0][7],
+        signature: data[0][8],
+        created: data[0][9],
+        business: data[0][10],
+        sync: data[0][11],
+        async: data[0][12]);
   } 
 }

@@ -96,8 +96,9 @@ class VenteEffectueeVipRepository {
       await ctx.execute(
           "INSERT INTO $tableName (id, identifiant, table,"
           "price_total_cart, qty, price, unite,"
-          "succursale, signature, created, business)"
-          "VALUES (nextval('vente_effectuee_vips_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8, @9, @10)",
+          "succursale, signature, created, business, sync, async)"
+          "VALUES (nextval('vente_effectuee_vips_id_seq'),"
+          "@1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12)",
           substitutionValues: {
             '1': data.identifiant,
             '2': data.table,
@@ -108,7 +109,9 @@ class VenteEffectueeVipRepository {
             '7': data.succursale,
             '8': data.signature,
             '9': data.created,
-            '10': data.business
+            '10': data.business,
+            '11': data.sync,
+            '12': data.async
           });
     });
   }
@@ -117,7 +120,8 @@ class VenteEffectueeVipRepository {
     await executor.query("""UPDATE $tableName
       SET identifiant = @1, table = @2, price_total_cart = @3,
         qty = @4, price = @5, unite = @6, succursale = @7, 
-        signature = @8, created = @9, business = @10 WHERE id = @11""",
+        signature = @8, created = @9, business = @10, 
+        sync = @11, async = @12 WHERE id = @13""",
         substitutionValues: {
           '1': data.identifiant,
           '2': data.table,
@@ -129,7 +133,9 @@ class VenteEffectueeVipRepository {
           '8': data.signature,
           '9': data.created,
           '10': data.business,
-          '11': data.id
+          '11': data.sync,
+          '12': data.async,
+          '13': data.id
         });
   }
 
@@ -159,6 +165,8 @@ class VenteEffectueeVipRepository {
       signature: data[0][8],
       created: data[0][9],
       business: data[0][10],
+      sync: data[0][11],
+      async: data[0][12],
     );
   }
 }
