@@ -36,7 +36,7 @@ Middleware handleErrors() {
 
 const corsHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin': 'https://wm-com-ivanna.web.app',
   'Access-Control-Expose-Headers': 'Authorization, Content-Type',
   'Access-Control-Allow-Headers': '*',
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, HEAD, OPTIONS'
