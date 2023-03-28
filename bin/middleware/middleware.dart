@@ -36,11 +36,10 @@ Middleware handleErrors() {
 
 const corsHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
-  'Access-Control-Allow-Origin': 'app',
+  'Access-Control-Allow-Origin': '*',
   'Access-Control-Expose-Headers': 'Authorization, Content-Type',
-  'Access-Control-Allow-Headers':
-      'Authorization, Origin, X-Requested-With, Content-Type, Accept',
-  'Access-Control-Allow-Methods': 'GET, DELETE, HEAD, OPTIONS'
+  'Access-Control-Allow-Headers': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, HEAD, OPTIONS'
 };  
 
 Middleware setJsonHeader() {
