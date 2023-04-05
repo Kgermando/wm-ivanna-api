@@ -5,7 +5,7 @@ import 'package:shelf_router/shelf_router.dart';
 
 import '../../models/rh/agent_count_model.dart';
 import '../../models/rh/agent_model.dart';
-import '../../repository/repository.dart'; 
+import '../../repository/repository.dart';
 
 class AgentsHandlers {
   final Repository repos;
@@ -20,8 +20,16 @@ class AgentsHandlers {
       return Response.ok(jsonEncode(data));
     });
 
-    router.get('/get-count/', (Request request) async {
-      AgentCountModel data = await repos.agents.getCount();
+    router.get('/chart-pie-sexe/<business>/',
+        (Request request, String business) async {
+      List<AgentPieChartModel> data =
+          await repos.agents.getAgentChartPie(business);
+      return Response.ok(jsonEncode(data));
+    });
+
+    router.get('/get-count/<business>/',
+        (Request request, String business) async {
+      AgentCountModel data = await repos.agents.getCount(business);
       return Response.ok(jsonEncode(data));
     });
 
@@ -39,32 +47,32 @@ class AgentsHandlers {
     router.post('/insert-new-agent', (Request request) async {
       var input = jsonDecode(await request.readAsString());
       AgentModel agent = AgentModel(
-          nom: input['nom'],
-          postNom: input['postNom'],
-          prenom: input['prenom'],
-          email: input['email'],
-          telephone: input['telephone'],
-          adresse: input['adresse'],
-          sexe: input['sexe'],
-          role: input['role'],
-          matricule: input['matricule'], 
-          dateNaissance: DateTime.parse(input['dateNaissance']),
-          lieuNaissance: input['lieuNaissance'],
-          nationalite: input['nationalite'],
-          typeContrat: input['typeContrat'],
-          departement: input['departement'],
-          servicesAffectation: input['servicesAffectation'],
-          dateDebutContrat: DateTime.parse(input['dateDebutContrat']),
-          dateFinContrat: DateTime.parse(input['dateFinContrat']),
-          fonctionOccupe: input['fonctionOccupe'],
-          detailPersonnel: input['detailPersonnel'],
-          statutAgent: input['statutAgent'],
-          createdAt: DateTime.parse(input['createdAt']),
-          photo: input['photo'],
-          salaire: input['salaire'],
-          signature: input['signature'],
-          created: DateTime.parse(input['created']),
-          isDelete: input['isDelete'],
+        nom: input['nom'],
+        postNom: input['postNom'],
+        prenom: input['prenom'],
+        email: input['email'],
+        telephone: input['telephone'],
+        adresse: input['adresse'],
+        sexe: input['sexe'],
+        role: input['role'],
+        matricule: input['matricule'],
+        dateNaissance: DateTime.parse(input['dateNaissance']),
+        lieuNaissance: input['lieuNaissance'],
+        nationalite: input['nationalite'],
+        typeContrat: input['typeContrat'],
+        departement: input['departement'],
+        servicesAffectation: input['servicesAffectation'],
+        dateDebutContrat: DateTime.parse(input['dateDebutContrat']),
+        dateFinContrat: DateTime.parse(input['dateFinContrat']),
+        fonctionOccupe: input['fonctionOccupe'],
+        detailPersonnel: input['detailPersonnel'],
+        statutAgent: input['statutAgent'],
+        createdAt: DateTime.parse(input['createdAt']),
+        photo: input['photo'],
+        salaire: input['salaire'],
+        signature: input['signature'],
+        created: DateTime.parse(input['created']),
+        isDelete: input['isDelete'],
         business: input['business'],
         sync: input['sync'],
         async: input['async'],
@@ -79,10 +87,9 @@ class AgentsHandlers {
     });
 
     router.put('/update-agent/', (Request request) async {
-       dynamic input = jsonDecode(await request.readAsString());
+      dynamic input = jsonDecode(await request.readAsString());
       final editH = AgentModel.fromJson(input);
-      AgentModel? selectUser =
-          await repos.agents.getFromId(editH.id!);
+      AgentModel? selectUser = await repos.agents.getFromId(editH.id!);
 
       if (input['nom'] != null) {
         selectUser.nom = input['nom'];
@@ -110,7 +117,7 @@ class AgentsHandlers {
       }
       if (input['matricule'] != null) {
         selectUser.matricule = input['matricule'];
-      } 
+      }
       if (input['dateNaissance'] != null) {
         selectUser.dateNaissance = DateTime.parse(input['dateNaissance']);
       }
@@ -140,7 +147,7 @@ class AgentsHandlers {
       }
       if (input['detailPersonnel'] != null) {
         selectUser.detailPersonnel = input['detailPersonnel'];
-      } 
+      }
       if (input['statutAgent'] != null) {
         selectUser.statutAgent = input['statutAgent'];
       }
@@ -180,12 +187,6 @@ class AgentsHandlers {
       var id = request.params['id'];
       repos.agents.deleteData(int.parse(id!));
       return Response.ok('Supprimée');
-    });
-
-
-    router.get('/chart-pie-sexe/', (Request request) async {
-      List<AgentPieChartModel> data = await repos.agents.getAgentChartPie();
-      return Response.ok(jsonEncode(data));
     });
 
     router.all(
