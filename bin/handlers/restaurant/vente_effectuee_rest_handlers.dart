@@ -119,7 +119,12 @@ class VenteEffectueeRestHandlers {
       if (input['async'] != null) {
         data.async = input['async'];
       }
-      repos.venteEffectueeRests.update(data);
+      try {
+        await repos.venteEffectueeRests.update(data);
+      } catch (e) {
+        print(e);
+        return Response(422);
+      }
       return Response.ok(jsonEncode(data.toJson()));
     });
 
