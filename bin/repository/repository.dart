@@ -190,7 +190,7 @@ class Repository {
     factureRests = FactureRestRepository(executor, 'facture_rests');
     restaurants = RestaurantRepository(executor, 'restaurants');
     tableRests = TableRestRepository(executor, 'table_rests');
-    venteEffectueeRests = VenteEffectueeRestRepository(executor, 'vente_effectuee_rests');
+    venteEffectueeRests = VenteEffectueeRestRepository(executor, 'vente_rests');
 
     // VIP
     prodVipModels = ProdModelVipRepository(executor, 'prod_model_vips');
