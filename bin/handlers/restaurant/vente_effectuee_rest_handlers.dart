@@ -63,7 +63,7 @@ class VenteEffectueeRestHandlers {
         unite: input['unite'], 
         succursale: input['succursale'],
         signature: input['signature'],
-        created: DateTime.parse(input['created']), 
+        created: DateTime.parse(input['created']),
         business: input['business'],
         sync: input['sync'],
         async: input['async'],

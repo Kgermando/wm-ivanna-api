@@ -98,7 +98,7 @@ class VenteEffectueeRestRepository {
         "price_total_cart, qty, price, unite,"
         "succursale, signature, created, business,"
         "sync, async)"
-        "VALUES (nextval('vente_effectuee_rests_id_seq'), @1, @2, @3,"
+        "VALUES (nextval('vente_rests_id_seq'), @1, @2, @3,"
         "@4, @5, @6, @7, @8, @9, @10, @11, @12)",
         substitutionValues: {
           '1': data.identifiant,

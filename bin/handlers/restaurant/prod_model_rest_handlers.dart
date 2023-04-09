@@ -29,7 +29,7 @@ class ProdModelRestHandlers {
       }
       return Response.ok(jsonEncode(data.toJson()));
     });
-
+ 
     router.post('/insert-new-produit-model', (Request request) async {
       var input = jsonDecode(await request.readAsString());
 
