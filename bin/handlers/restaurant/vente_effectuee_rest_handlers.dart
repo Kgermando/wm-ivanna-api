@@ -70,8 +70,9 @@ class VenteEffectueeRestHandlers {
       );
       try {
         await repos.venteEffectueeRests.insertData(data);
+        print("data $data");
       } catch (e) {
-        print(e);
+        print("e $e");
         return Response(422);
       }
       return Response.ok(jsonEncode(data.toJson()));
