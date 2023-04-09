@@ -1,7 +1,7 @@
 class TableRestaurantModel {
-  late int? id; 
-  late String table;
-  late String part;  // cote bon de commande ou bon de consommation
+  late int? id;
+  late String tableRest;
+  late String part; // cote bon de commande ou bon de consommation
   late String succursale;
   late String signature; // Celui qui fait le document
   late DateTime created;
@@ -9,14 +9,14 @@ class TableRestaurantModel {
   late String sync; // new, update, sync
   late String async;
 
-  TableRestaurantModel(
-      {this.id, 
-      required this.table,
-      required this.part,
-      required this.succursale,
-      required this.signature,
-      required this.created,
-      required this.business,
+  TableRestaurantModel({
+    this.id,
+    required this.tableRest,
+    required this.part,
+    required this.succursale,
+    required this.signature,
+    required this.created,
+    required this.business,
     required this.sync,
     required this.async,
   });
@@ -24,22 +24,21 @@ class TableRestaurantModel {
   factory TableRestaurantModel.fromSQL(List<dynamic> row) {
     return TableRestaurantModel(
         id: row[0],
-        table: row[1],
+        tableRest: row[1],
         part: row[2],
         succursale: row[3],
         signature: row[4],
         created: row[5],
         business: row[6],
         sync: row[7],
-        async: row[8]
-    );
+        async: row[8]);
   }
 
   factory TableRestaurantModel.fromJson(Map<String, dynamic> json) {
     return TableRestaurantModel(
-      id: json['id'], 
-      table: json['table'],
-      part: json['part'], 
+      id: json['id'],
+      tableRest: json['tableRest'],
+      part: json['part'],
       succursale: json['succursale'],
       signature: json['signature'],
       created: DateTime.parse(json['created']),
@@ -49,11 +48,11 @@ class TableRestaurantModel {
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJson({int? id}) {
     return {
-      'id': id, 
-      'table': table,
-      'part': part, 
+      'id': id,
+      'tableRest': tableRest,
+      'part': part,
       'succursale': succursale,
       'signature': signature,
       'created': created.toIso8601String(),

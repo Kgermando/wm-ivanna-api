@@ -33,7 +33,7 @@ class TableLivraisonHandlers {
     router.post('/insert-new-table', (Request request) async {
       var input = jsonDecode(await request.readAsString());
       TableRestaurantModel dataItem = TableRestaurantModel(
-        table: input['table'],
+        tableRest: input['tableRest'],
         part: input['part'], 
         succursale: input['succursale'],
         signature: input['signature'],
@@ -56,8 +56,8 @@ class TableLivraisonHandlers {
       dynamic input = jsonDecode(await request.readAsString());
       final editH = TableRestaurantModel.fromJson(input);
       TableRestaurantModel? dataItem = await repos.tableLivraisons.getFromId(editH.id!); 
-      if (input['table'] != null) {
-        dataItem.table = input['table'];
+      if (input['tableRest'] != null) {
+        dataItem.tableRest = input['tableRest'];
       }
       if (input['part'] != null) {
         dataItem.part = input['part'];

@@ -25,11 +25,11 @@ class TableLivraisonRepository {
   Future<void> insertData(TableRestaurantModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-          "INSERT INTO $tableName (id, table, part,"
+          "INSERT INTO $tableName (id, table_rest, part,"
           "succursale, signature, created, business, sync, async)"
           "VALUES (nextval('table_livraisons_id_seq'), @1, @2, @3, @4, @5, @6, @7, @8)",
           substitutionValues: {
-            '1': data.table,
+            '1': data.tableRest,
             '2': data.part,
             '3': data.succursale,
             '4': data.signature,
@@ -43,10 +43,10 @@ class TableLivraisonRepository {
 
   Future<void> update(TableRestaurantModel data) async {
     await executor.query("""UPDATE $tableName
-      SET table = @1, part = @2, succursale = @3,
+      SET table_rest = @1, part = @2, succursale = @3,
       signature = @4, created = @5, business = @6, 
       sync = @7, async = @8 WHERE id = @9""", substitutionValues: {
-      '1': data.table,
+      '1': data.tableRest,
       '2': data.part,
       '3': data.succursale,
       '4': data.signature,
@@ -74,7 +74,7 @@ class TableLivraisonRepository {
         await executor.query("SELECT * FROM  $tableName WHERE \"id\" = '$id'");
     return TableRestaurantModel(
       id: data[0][0],
-      table: data[0][1],
+      tableRest: data[0][1],
       part: data[0][2],
       succursale: data[0][3],
       signature: data[0][4],
