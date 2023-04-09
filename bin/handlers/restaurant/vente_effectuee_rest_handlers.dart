@@ -56,7 +56,7 @@ class VenteEffectueeRestHandlers {
       var input = jsonDecode(await request.readAsString());
       VenteRestaurantModel data = VenteRestaurantModel(
         identifiant: input['identifiant'],
-        table: input['table'],
+        tableRest: input['tableRest'],
         priceTotalCart: input['priceTotalCart'],
         qty: input['qty'],
         price: input['price'],
@@ -87,8 +87,8 @@ class VenteEffectueeRestHandlers {
       if (input['identifiant'] != null) {
         data.identifiant = input['identifiant'];
       }
-      if (input['table'] != null) {
-        data.table = input['table'];
+      if (input['tableRest'] != null) {
+        data.tableRest = input['tableRest'];
       }
       if (input['priceTotalCart'] != null) {
         data.priceTotalCart = input['priceTotalCart'];

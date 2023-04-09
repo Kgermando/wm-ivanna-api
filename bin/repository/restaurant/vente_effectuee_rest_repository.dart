@@ -94,7 +94,7 @@ class VenteEffectueeRestRepository {
   Future<void> insertData(VenteRestaurantModel data) async {
     await executor.transaction((ctx) async {
       await ctx.execute(
-        "INSERT INTO $tableName (id, identifiant, table,"
+        "INSERT INTO $tableName (id, identifiant, table_rest,"
         "price_total_cart, qty, price, unite,"
         "succursale, signature, created, business,"
         "sync, async)"
@@ -102,7 +102,7 @@ class VenteEffectueeRestRepository {
         "@4, @5, @6, @7, @8, @9, @10, @11, @12)",
         substitutionValues: {
           '1': data.identifiant,
-          '2': data.table,
+          '2': data.tableRest,
           '3': data.priceTotalCart,
           '4': data.qty,
           '5': data.price,
@@ -119,12 +119,12 @@ class VenteEffectueeRestRepository {
 
   Future<void> update(VenteRestaurantModel data) async {
     await executor.query("""UPDATE $tableName
-      SET identifiant = @1, table = @2, price_total_cart = @3,
+      SET identifiant = @1, table_rest = @2, price_total_cart = @3,
         qty = @4, price = @5, unite = @6, succursale = @7, 
         signature = @8, created = @9, business = @10, 
         sync = @11, async = @12 WHERE id = @13""", substitutionValues: {
       '1': data.identifiant,
-      '2': data.table,
+      '2': data.tableRest,
       '3': data.priceTotalCart,
       '4': data.qty,
       '5': data.price,
@@ -156,7 +156,7 @@ class VenteEffectueeRestRepository {
     return VenteRestaurantModel(
       id: data[0][0],
       identifiant: data[0][1],
-      table: data[0][2],
+      tableRest: data[0][2],
       priceTotalCart: data[0][3],
       qty: data[0][4],
       price: data[0][5],

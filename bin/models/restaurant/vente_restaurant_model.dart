@@ -1,7 +1,7 @@
 class VenteRestaurantModel {
   late int? id;
   late String identifiant;
-  late String table;
+  late String tableRest;
   late String priceTotalCart;
   late String qty;
   late String price;
@@ -16,7 +16,7 @@ class VenteRestaurantModel {
   VenteRestaurantModel(
       {this.id,
       required this.identifiant,
-      required this.table,
+      required this.tableRest,
       required this.priceTotalCart,
       required this.qty,
       required this.price,
@@ -33,7 +33,7 @@ class VenteRestaurantModel {
     return VenteRestaurantModel(
         id: row[0],
         identifiant: row[1],
-        table: row[2],
+        tableRest: row[2],
         priceTotalCart: row[3],
         qty: row[4],
         price: row[5],
@@ -51,7 +51,7 @@ class VenteRestaurantModel {
     return VenteRestaurantModel(
         id: json['id'],
         identifiant: json['identifiant'],
-        table: json['table'],
+        tableRest: json['tableRest'],
         priceTotalCart: json['priceTotalCart'],
         qty: json['qty'],
         price: json['price'],
@@ -69,7 +69,7 @@ class VenteRestaurantModel {
     return {
       'id': id,
       'identifiant': identifiant,
-      'table': table,
+      'tableRest': tableRest,
       'priceTotalCart': priceTotalCart,
       'qty': qty,
       'price': price,
