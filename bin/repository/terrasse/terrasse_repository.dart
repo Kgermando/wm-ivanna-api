@@ -24,14 +24,14 @@ class TerrasseRepository {
   Future<void> insertData(RestaurantModel data) async {
     await executor.transaction((ctx) async {
       await ctx.query(
-          "INSERT INTO $tableName (id, identifiant, table, qty,"
+          "INSERT INTO $tableName (id, identifiant, table_rest, qty,"
           "price, unite, statut_commande, succursale, signature,"
           "created, business, sync, async)"
           "VALUES (nextval('terrasses_id_seq'), @1, @2, @3,"
           "@4, @5, @6, @7, @8, @9, @10, @11, @12)",
           substitutionValues: {
             '1': data.identifiant,
-            '2': data.table,
+            '2': data.tableRest,
             '3': data.qty,
             '4': data.price,
             '5': data.unite,
@@ -48,12 +48,12 @@ class TerrasseRepository {
 
   Future<void> update(RestaurantModel data) async {
     await executor.query("""UPDATE $tableName
-      SET identifiant = @1, table = @2, qty = @3, price = @4, 
+      SET identifiant = @1, table_rest = @2, qty = @3, price = @4, 
         unite = @5, statut_commande = @6, succursale = @7, signature = @8, 
         created = @9, business = @10, sync = @11, async = @12 WHERE id = @13""",
         substitutionValues: {
           '1': data.identifiant,
-          '2': data.table,
+          '2': data.tableRest,
           '3': data.qty,
           '4': data.price,
           '5': data.unite,
@@ -86,7 +86,7 @@ class TerrasseRepository {
     return RestaurantModel(
       id: data[0][0],
       identifiant: data[0][1],
-      table: data[0][2],
+      tableRest: data[0][2],
       qty: data[0][3],
       price: data[0][4],
       unite: data[0][5],

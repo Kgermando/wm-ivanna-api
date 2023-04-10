@@ -9,20 +9,6 @@ import 'handlers/archives/archive_folder_handlers.dart';
 import 'handlers/archives/archive_handlers.dart';
 import 'handlers/auth/auth_handlers.dart';
 import 'handlers/auth/user_handlers.dart';
-import 'handlers/commercial/achats_handlers.dart';
-import 'handlers/commercial/bon_livraison_handlers.dart';
-import 'handlers/commercial/cart_handlers.dart';
-import 'handlers/commercial/creance_facture_handlers.dart';
-import 'handlers/commercial/facture_handlers.dart';
-import 'handlers/commercial/gains_handlers.dart';
-import 'handlers/commercial/history_livraison_handlers.dart';
-import 'handlers/commercial/history_ravitaillement_handlers.dart';
-import 'handlers/commercial/number_fact_handlers.dart';
-import 'handlers/commercial/produit_model_handlers.dart';
-import 'handlers/commercial/restitution_handlers.dart';
-import 'handlers/commercial/stocks_global_handlers.dart';
-import 'handlers/commercial/succursale_handlers.dart';
-import 'handlers/commercial/ventes_handlers.dart';
 import 'handlers/finances/caisse_names_handlers.dart';
 import 'handlers/finances/caisses_handlers.dart';
 import 'handlers/livraison/creance_livraison_handlers.dart';
@@ -125,106 +111,7 @@ class Service {
             // .addMiddleware(handleAuth(serverSecretKey))
             .addHandler(AgentsHandlers(repos).router));
 
-    // COMMERCIAL
-    router.mount(
-        '/api/stocks-global/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(StockGlobalHandlers(repos).router));
-    router.mount(
-        '/api/succursales/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(SuccursaleHandlers(repos).router));
-    router.mount(
-        '/api/bon-livraisons/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(BonLivraisonHandlers(repos).router));
-    router.mount(
-        '/api/restitutions/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(RestitutionHandlers(repos).router));
-    router.mount(
-        '/api/history-livraisons/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(HistoryLivraisonHandlers(repos).router));
-    router.mount(
-        '/api/produit-models/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(ProduitModelHandlers(repos).router));
-    router.mount(
-        '/api/achats/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(AchatsHandlers(repos).router));
-    router.mount(
-        '/api/carts/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(CartHandlers(repos).router));
-    router.mount(
-        '/api/factures/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(FactureHandlers(repos).router));
-    router.mount(
-        '/api/facture-creances/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(CreanceFactureHandlers(repos).router));
-    router.mount(
-        '/api/ventes/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(VenteHandlers(repos).router));
-    router.mount(
-        '/api/gains/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(GainsHandlers(repos).router));
-    router.mount(
-        '/api/history-ravitaillements/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(HistoryRavitaillementHandlers(repos).router));
-    router.mount(
-        '/api/number-facts/',
-        Pipeline()
-            .addMiddleware(setJsonHeader())
-            .addMiddleware(handleErrors())
-            // .addMiddleware(handleAuth(serverSecretKey))
-            .addHandler(NumberFactHandlers(repos).router)); 
-
+ 
     // Restaurant
     router.mount(
         '/api/prod-mode-rests/',

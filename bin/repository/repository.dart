@@ -3,20 +3,6 @@ import 'package:postgres/postgres.dart';
 import 'abonnement/abonnement_repository.dart';
 import 'archives/archive_folder_repository.dart';
 import 'archives/archive_repository.dart';
-import 'commercial/achats_repository.dart'; 
-import 'commercial/bon_livraison_repository.dart';
-import 'commercial/cart_repository.dart';
-import 'commercial/creance_cart_repository.dart';
-import 'commercial/facture_cart_repository.dart';
-import 'commercial/gain_repository.dart';
-import 'commercial/history_livraison_repository.dart';
-import 'commercial/history_ravitraillement_repository.dart';
-import 'commercial/number_facture_repository.dart';
-import 'commercial/produit_model_repository.dart';
-import 'commercial/restitution_repository.dart';
-import 'commercial/stocks_global_repository.dart';
-import 'commercial/succursale_repository.dart';
-import 'commercial/vente_repository.dart';
 import 'finance/caisse_name_repository.dart';
 import 'finance/caissses_repository.dart';
 import 'livraison/creance_livraison_repository.dart';
@@ -72,21 +58,6 @@ class Repository {
   // RH
   late AgentsRepository agents;
 
-  // COMMERCIAL
-  late ProduitModelRepository produitModel;
-  late AchatsRepository achats;
-  late CartRepository carts;
-  late FactureRepository factures;
-  late CreanceFactureRepository creancesFacture;
-  late NumberFactureRepository numberFacture;
-  late VenteRepository ventes;
-  late GainRepository gains;
-  late HistoryRavitaillementRepository historyRavitaillements; 
-  late StockGlobalRepository stocksGlobal;
-  late SuccursaleRepository succursales;
-  late BonLivraisonRepository bonLivraison;
-  late RestitutionRepository restitutions;
-  late HistoryLivraisonRepository historyLivraisons;
 
   // RESTAURANT
   late ProdModelRestRepository prodRestModels;
@@ -165,24 +136,6 @@ class Repository {
     // RH
     agents = AgentsRepository(executor, 'agents');
 
-    // COMMERCIAL
-    produitModel = ProduitModelRepository(executor, 'produits_model');
-    achats = AchatsRepository(executor, 'achats');
-    carts = CartRepository(executor, 'carts');
-    factures = FactureRepository(executor, 'factures');
-    creancesFacture = CreanceFactureRepository(executor, 'creance_factures');
-    numberFacture = NumberFactureRepository(executor, 'number_factures');
-    ventes = VenteRepository(executor, 'ventes');
-    gains = GainRepository(executor, 'gains');
-    historyRavitaillements =
-        HistoryRavitaillementRepository(executor, 'history_ravitaillements'); 
-
-    stocksGlobal = StockGlobalRepository(executor, 'stocks_global');
-    succursales = SuccursaleRepository(executor, 'succursales');
-    bonLivraison = BonLivraisonRepository(executor, 'bon_livraisons');
-    restitutions = RestitutionRepository(executor, 'restitutions');
-    historyLivraisons =
-        HistoryLivraisonRepository(executor, 'history_livraisons');
 
     // RESTAURANT
     prodRestModels = ProdModelRestRepository(executor, 'prod_model_rests');

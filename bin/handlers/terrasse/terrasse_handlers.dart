@@ -34,7 +34,7 @@ class TerrasseHandlers {
       var input = jsonDecode(await request.readAsString());
       RestaurantModel dataItem = RestaurantModel(
         identifiant: input['identifiant'],
-        table: input['table'],
+        tableRest: input['tableRest'],
         qty: input['qty'],
         price: input['price'],
         unite: input['unite'],
@@ -64,8 +64,8 @@ class TerrasseHandlers {
       if (input['identifiant'] != null) {
         dataItem.identifiant = input['identifiant'];
       }
-      if (input['table'] != null) {
-        dataItem.table = input['table'];
+      if (input['tableRest'] != null) {
+        dataItem.tableRest = input['tableRest'];
       }
       if (input['qty'] != null) {
         dataItem.qty = input['qty'];

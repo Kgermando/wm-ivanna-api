@@ -1,7 +1,7 @@
 class RestaurantModel {
   late int? id;
   late String identifiant;
-  late String table;
+  late String tableRest;
   late String qty;
   late String price;
   late String unite;  
@@ -16,7 +16,7 @@ class RestaurantModel {
   RestaurantModel(
       {this.id,
       required this.identifiant,
-      required this.table,
+      required this.tableRest,
       required this.qty,
       required this.price,
       required this.unite,
@@ -33,7 +33,7 @@ class RestaurantModel {
     return RestaurantModel(
         id: row[0],
         identifiant: row[1],
-        table: row[2],
+        tableRest: row[2],
         qty: row[3],
         price: row[4],
         unite: row[5],
@@ -50,7 +50,7 @@ class RestaurantModel {
     return RestaurantModel(
         id: json['id'],
         identifiant: json['identifiant'],
-        table: json['table'],
+        tableRest: json['tableRest'],
         qty: json['qty'],
         price: json['price'],
         unite: json['unite'],
@@ -68,7 +68,7 @@ class RestaurantModel {
     return {
       'id': id,
       'identifiant': identifiant,
-      'table': table,
+      'tableRest': tableRest,
       'qty': qty,
       'price': price,
       'unite': unite,
